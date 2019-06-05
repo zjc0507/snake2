@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Queue;
@@ -23,9 +24,11 @@ public class GameState {
 
     private Food mFood = new Food(boardSize);
 
-    private int snakeLength = 3;
+    private int snakeLength = 5;
 
     private float colourCounter = 0;
+
+
 
     public GameState() {
         mBody.addLast(new Bodypart(15,15,boardSize)); //head
@@ -76,7 +79,8 @@ public class GameState {
         for (int i = 1; i<mBody.size; i++) {     //Death
             if (mBody.get(i).getX() == mBody.first().getX()
                     && mBody.get(i).getY() == mBody.first().getY()) {
-                snakeLength = 3;
+                snakeLength = 5;
+                //go to game over screen
             }
         }
 
@@ -114,7 +118,10 @@ public class GameState {
         shapeRenderer.rect(365,135,130,130);
 
 
+
+
         float scaleSnake = width/boardSize;
+
 
         shapeRenderer.rect(mFood.getX() * scaleSnake, mFood.getY()*scaleSnake + yOffset, scaleSnake, scaleSnake);//draw a food
         //shapeRenderer.rect(mFood.getY()*scaleSnake + yOffset,mFood.getX() * scaleSnake, scaleSnake, scaleSnake);

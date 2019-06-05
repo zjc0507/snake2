@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 
+
+//setting for menu
 public class GameConstant {
     public static final String skin = new String("glassy-ui.json");
     public static final int screenWidth = Gdx.graphics.getWidth();

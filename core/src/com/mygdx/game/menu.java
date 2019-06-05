@@ -39,7 +39,8 @@ public class menu implements Screen {
 
 
         Label gameTitle = new Label("Game Menu",mySkin,"big");
-        gameTitle.setSize(GameConstant.centerX*2,GameConstant.row_height*2);
+        //gameTitle.setSize(GameConstant.centerX*6,GameConstant.row_height*4);
+        gameTitle.setSize(500,500);
         //gameTitle.setPosition(0,GameConstant.centerY);
         gameTitle.setPosition(GameConstant.centerX-gameTitle.getWidth()/2,GameConstant.centerY+GameConstant.row_height);
         gameTitle.setAlignment(Align.center);
@@ -59,35 +60,59 @@ public class menu implements Screen {
                 return true;
             }
 
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-            }
         });
 
-        Button settingBtn = new TextButton("Setting",mySkin,"default"); // btn for setting
-        settingBtn.setSize(GameConstant.col_width*4,GameConstant.row_height);
-        settingBtn.setPosition(GameConstant.centerX-settingBtn.getWidth()/2,startBtn.getY()-GameConstant.row_height-30);
-        settingBtn.addListener(new InputListener(){
+        Button setting_easy = new TextButton("Easy",mySkin,"default"); // btn for setting_easy
+        //setting_easy.setSize(GameConstant.col_width,GameConstant.row_height);
+        setting_easy.setPosition(50,690);
+        setting_easy.addListener(new InputListener(){
 
+
+            //when touch the button
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.gotoSettingsScreen();
+                game.gotoGameScreen();
                 return true;
             }
 
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-            }
         });
 
 
+
+        Button setting_normal = new TextButton("Normal",mySkin,"default"); // btn for setting_normal
+        //setting_normal.setSize(GameConstant.col_width,GameConstant.row_height);
+        setting_normal.setPosition(400,690);
+        setting_normal.addListener(new InputListener(){
+
+
+            //when touch the button
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+        });
+
+        Button setting_hard = new TextButton("Hard",mySkin,"default"); // btn for setting_hard
+        //setting_hard.setSize(GameConstant.col_width*4,GameConstant.row_height);
+        setting_hard.setPosition(750,690);
+        setting_hard.addListener(new InputListener(){
+
+
+            //when touch the button
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+        });
 
         //add title and btn
         stage.addActor(gameTitle);
         stage.addActor(startBtn);
-        stage.addActor(settingBtn);
+        stage.addActor(setting_easy);
+        stage.addActor(setting_normal);
+        stage.addActor(setting_hard);
     }
 
     @Override

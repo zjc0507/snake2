@@ -36,13 +36,11 @@ public class Main extends Game {
 		//start from menu screen
 		this.setScreen(new menu((this)));
 
+		//this.setScreen(new GameOverScreen(this,0));
+
 	}
 
 
-	public  void gotoSettingsScreen(){
-		SettingsScreen settingsScreen = new SettingsScreen(this);
-		setScreen(settingsScreen);
-	}
 
 	public void gotoGameScreen(){
 		GameScreen gameScreen=new GameScreen(this);
