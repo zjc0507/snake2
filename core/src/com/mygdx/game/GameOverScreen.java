@@ -8,24 +8,28 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 
 public class GameOverScreen implements Screen {
 
-    private static final int BANNER_WIDTH=350;
-    private static final int BANNER_HEIGHT=100;
+    private static final int BANNER_WIDTH=550;
+    private static final int BANNER_HEIGHT=300;
 
 
     Main game;
-    int score,highscore;
+
+    public int score;
+    public int highscore = score;
 
     Texture gameoverBanner;
+
     BitmapFont scoreFont;
 
+
+
     public GameOverScreen(Main game,int score){
-        this.game=game;
-        this.score=score;
+        this.game = game;
+        this.score = score;
 
 
         //get highscore from save file
@@ -33,7 +37,8 @@ public class GameOverScreen implements Screen {
         this.highscore=prefs.getInteger("highscore",0);
 
         //check if score beats highscore
-        if(score> highscore){
+        if(score > highscore){
+            highscore = score;
             prefs.putInteger("highscore",score);
             prefs.flush();
         }
@@ -41,6 +46,7 @@ public class GameOverScreen implements Screen {
         //load textures and fonts
         gameoverBanner = new Texture("game_over.png");
         scoreFont=new BitmapFont(Gdx.files.internal("score.fnt"));
+
     }
     @Override
     public void show() {
@@ -57,16 +63,18 @@ public class GameOverScreen implements Screen {
 
         GlyphLayout scoreLayout = new GlyphLayout(scoreFont,"Score: \n" + score, Color.WHITE,0, Align.left,false);
         GlyphLayout highscorreLayout = new GlyphLayout(scoreFont,"Highscore: \n" + highscore, Color.WHITE,0, Align.left,false);
-        scoreFont.draw(game.batch,scoreLayout,Gdx.graphics.getWidth()/2-scoreLayout.width/2,Gdx.graphics.getHeight()-BANNER_HEIGHT-15*2);
-        scoreFont.draw(game.batch,highscorreLayout,Gdx.graphics.getWidth()/2-highscorreLayout.width/2,Gdx.graphics.getHeight()-BANNER_HEIGHT-scoreLayout.height-15*2);
+        scoreFont.draw(game.batch,scoreLayout,Gdx.graphics.getWidth()/2-scoreLayout.width/2,Gdx.graphics.getHeight()-BANNER_HEIGHT-15*5);
+        scoreFont.draw(game.batch,highscorreLayout,Gdx.graphics.getWidth()/2-highscorreLayout.width/2,Gdx.graphics.getHeight()-BANNER_HEIGHT-scoreLayout.height-15*10);
 
         GlyphLayout tryAgainLayout = new GlyphLayout(scoreFont,"Try Again");
         GlyphLayout mainMenuLayout = new GlyphLayout(scoreFont,"Main Menu");
 
+        //Button tryAgainLayout = new TextButton("Start Game",mySkin,"default");
+
         float tryAgainX = Gdx.graphics.getWidth()/2-tryAgainLayout.width/2;
         float tryAgainY = Gdx.graphics.getHeight()/2-tryAgainLayout.height/2;
         float mainMenuX = Gdx.graphics.getWidth()/2-mainMenuLayout.width/2;
-        float mainMenuY = Gdx.graphics.getHeight()/2-mainMenuLayout.height/2 - tryAgainLayout.height-15;
+        float mainMenuY = Gdx.graphics.getHeight()/2-mainMenuLayout.height/2 - tryAgainLayout.height-100;
 
         float touchX = Gdx.input.getX(),touchY=Gdx.graphics.getHeight()-Gdx.input.getY();
 
@@ -93,6 +101,8 @@ public class GameOverScreen implements Screen {
         scoreFont.draw(game.batch,tryAgainLayout,tryAgainX,tryAgainY);
         scoreFont.draw(game.batch,mainMenuLayout,mainMenuX,mainMenuY);
         game.batch.end();
+
+
     }
 
     @Override

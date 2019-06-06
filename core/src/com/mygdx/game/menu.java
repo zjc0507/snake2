@@ -29,6 +29,8 @@ public class menu implements Screen {
     private Skin mySkin;
     private Viewport viewport;
 
+    private float snakeSpeed;
+
     public menu(final Main game){
         this.game=game;
 
@@ -50,13 +52,12 @@ public class menu implements Screen {
         startBtn.setSize(GameConstant.col_width*4,GameConstant.row_height);
         startBtn.setPosition(GameConstant.centerX-startBtn.getWidth()/2,GameConstant.centerY);
         startBtn.addListener(new InputListener(){
-
-
             //when touch the button
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 //this.setScreen(new GameScreen(this));
-                game.gotoGameScreen();
+                snakeSpeed = 0.13f;
+                game.gotoGameScreen(snakeSpeed);
                 return true;
             }
 
@@ -66,12 +67,11 @@ public class menu implements Screen {
         //setting_easy.setSize(GameConstant.col_width,GameConstant.row_height);
         setting_easy.setPosition(50,690);
         setting_easy.addListener(new InputListener(){
-
-
             //when touch the button
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.gotoGameScreen();
+                snakeSpeed = 0.13f;
+                game.gotoGameScreen(snakeSpeed);
                 return true;
             }
 
@@ -83,11 +83,11 @@ public class menu implements Screen {
         //setting_normal.setSize(GameConstant.col_width,GameConstant.row_height);
         setting_normal.setPosition(400,690);
         setting_normal.addListener(new InputListener(){
-
-
             //when touch the button
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                snakeSpeed = 0.10f;
+                game.gotoGameScreen(snakeSpeed);
                 return true;
             }
 
@@ -97,11 +97,11 @@ public class menu implements Screen {
         //setting_hard.setSize(GameConstant.col_width*4,GameConstant.row_height);
         setting_hard.setPosition(750,690);
         setting_hard.addListener(new InputListener(){
-
-
             //when touch the button
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                snakeSpeed = 0.08f;
+                game.gotoGameScreen(snakeSpeed);
                 return true;
             }
 

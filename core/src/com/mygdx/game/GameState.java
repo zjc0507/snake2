@@ -27,10 +27,11 @@ public class GameState {
     private int snakeLength = 5;
 
     private float colourCounter = 0;
+    private GameScreen gameScreen;
 
 
-
-    public GameState() {
+    public GameState(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
         mBody.addLast(new Bodypart(15,15,boardSize)); //head
         mBody.addLast(new Bodypart(15,14,boardSize));
         mBody.addLast(new Bodypart(15,13,boardSize));
@@ -43,7 +44,7 @@ public class GameState {
         mTimer += delta;
         colourCounter += delta;
         controls.update(viewport);
-        if (mTimer > 0.13f) {
+        if (mTimer > gameScreen.game.snakeSpeed) {
             mTimer = 0;
             advance();
         }
@@ -71,9 +72,15 @@ public class GameState {
                 break;
         }
 
+
+
         if (mBody.first().getX() == mFood.getX() && mBody.first().getY() == mFood.getY()) {//check if get the food
             snakeLength++;
             mFood.randomisePos(boardSize);
+
+            gameScreen.game.score++;
+            //System.out.println(score);
+
         }
 
         for (int i = 1; i<mBody.size; i++) {     //Death
@@ -81,6 +88,8 @@ public class GameState {
                     && mBody.get(i).getY() == mBody.first().getY()) {
                 snakeLength = 5;
                 //go to game over screen
+                gameScreen.game.setScreen(new GameOverScreen(gameScreen.game,gameScreen.game.score));
+                gameScreen.game.score = 0;
             }
         }
 

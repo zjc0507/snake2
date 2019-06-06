@@ -21,7 +21,8 @@ public class Main extends Game {
 	SpriteBatch batch;
 	public Viewport screenPort;
 
-
+	public float snakeSpeed = 0.13f;
+	public int score = 0;
 
 
 	@Override
@@ -42,8 +43,9 @@ public class Main extends Game {
 
 
 
-	public void gotoGameScreen(){
-		GameScreen gameScreen=new GameScreen(this);
+	public void gotoGameScreen(float snakeSpeed){
+		this.snakeSpeed = snakeSpeed;
+		GameScreen gameScreen = new GameScreen(this);
 		//setScreen(gameScreen);
 		this.setScreen(new GameScreen(this));
 	}
